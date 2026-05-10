@@ -28,28 +28,40 @@
   };
 
 Renderer2D::Renderer2D()
-    : fragment("../shaders/Vertex.glsl", "../shaders/Fragment.glsl"),
+    : fragment("../Engine/shaders/Vertex.glsl", "../Engine/shaders/Fragment.glsl"),
       triangleOneMesh(triangle1, sizeof(triangle1)),
       triangleTwoMesh(triangle2, sizeof(triangle2)),
       triangleThreeMesh(triangle3, sizeof(triangle3)) {}
 // clang-format on
 
 // Drawing Shapes
-void Renderer2D::DrawRectangle() {}
+void Renderer2D::DrawQuad(const glm::vec2& pos, const glm::vec2& size, const glm::vec4& color) {
+}
 
-void Renderer2D::DrawTriangle() {}
+void Renderer2D::DrawTriangle() {
+}
 
 // Rendering
-void Renderer2D::BeginFrame() {}
+void Renderer2D::BeginFrame() {
+}
 
-void Renderer2D::EndFrame() {}
+void Renderer2D::EndFrame() {
+}
 
-void Renderer2D::Init() {}
+void Renderer2D::Init() {
+}
 
 void Renderer2D::Render() {
   glClear(GL_COLOR_BUFFER_BIT);
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+  BeginFrame();
+
+  DrawQuad({0, 0}, {1, 1}, RGB::rgb(255, 0, 0));
+  DrawQuad({1, 1}, {1, 1}, RGB::rgb(255, 0, 0));
+
+  EndFrame();
 
   fragment.Use();
   fragment.SetColor(RGB::rgb(255, 0, 0));

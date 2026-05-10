@@ -66,13 +66,18 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
   glDeleteShader(fragmentShader);
 }
 
-void Shader::Use() { glUseProgram(shaderProgram); }
-
-void Shader::SetColor(const RGB& color) {
-  GLint location = glGetUniformLocation(shaderProgram, "uColor");
-  glUniform3f(location, color.r, color.g, color.b);
+void Shader::Use() {
+  glUseProgram(shaderProgram);
 }
 
-void Shader::Bind() {}
+void Shader::SetColor(const glm::vec4& color) {
+  GLint location = glGetUniformLocation(shaderProgram, "uColor");
+  glUniform4f(location, color.r, color.g, color.b, color.a);
+}
 
-Shader::~Shader() { glDeleteProgram(shaderProgram); }
+void Shader::Bind() {
+}
+
+Shader::~Shader() {
+  glDeleteProgram(shaderProgram);
+}

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <glm/ext/vector_float4.hpp>
+#include <glm/glm.hpp>
+
 #include "../Shader/Shader.hpp"
 #include "../Mesh/Mesh.hpp"
 
@@ -12,8 +15,8 @@ class Renderer2D {
   void Render();
 
   // Primitive Shapes
+  void DrawQuad(const glm::vec2& pos, const glm::vec2& size, const glm::vec4& color);
   void DrawTriangle();
-  void DrawRectangle();
 
   // TODO:
   // Collects data on a CPU buffer. DOES NOT DRAW ANYTHING!

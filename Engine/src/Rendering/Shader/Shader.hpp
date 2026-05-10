@@ -1,15 +1,15 @@
 #pragma once
 
 #include <string>
-
-#include "../../Utils/RGB.hpp"
+#include <glm/ext/vector_float4.hpp>
+#include <glm/glm.hpp>
 
 class Shader {
  public:
   Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
   ~Shader();
   void Use();
-  void SetColor(const RGB& color);
+  void SetColor(const glm::vec4& color);
   void Bind();
 
  private:
