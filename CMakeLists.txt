@@ -19,6 +19,7 @@ add_executable(HeavenEngine
     src/Rendering/Buffer/IndexBuffer.cpp
     src/Rendering/Buffer/VertexArray.cpp
     src/Rendering/Mesh/Mesh.cpp
+    src/Utils/RGB.cpp
     external/glad/src/glad.c
 )
 

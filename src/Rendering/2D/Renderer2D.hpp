@@ -15,10 +15,27 @@ class Renderer2D {
   void DrawTriangle();
   void DrawRectangle();
 
+  // TODO:
+  // Collects data on a CPU buffer. DOES NOT DRAW ANYTHING!
+  void BeginFrame();
+  // This is what actually uses those buffers to draw vertices on the GPU!
+  void EndFrame();
+
+  // Example:
+  /*
+    Renderer2D.BeginFrame();
+
+    Renderer2D.DrawQuad();
+    Renderer2D.DrawQuad();
+    Renderer2D.DrawQuad();
+
+    Renderer2D.EndFrame();
+  */
+
  private:
   Mesh triangleOneMesh;
   Mesh triangleTwoMesh;
+  Mesh triangleThreeMesh;
 
-  Shader redShader;
-  Shader orangeShader;
+  Shader fragment;
 };

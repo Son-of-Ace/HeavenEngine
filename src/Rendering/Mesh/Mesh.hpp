@@ -14,9 +14,10 @@ class Mesh {
   void Draw();
 
  private:
-  int vertexCount;
+  int m_vertexCount;
+  int m_indexCount;
 
-  VertexArray vao;
-  std::unique_ptr<VertexBuffer> vbo;
-  std::unique_ptr<IndexBuffer> ebo;
+  VertexArray m_vao;
+  std::unique_ptr<VertexBuffer> m_vbo;
+  std::unique_ptr<IndexBuffer> m_ebo;
 };
