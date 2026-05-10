@@ -13,9 +13,12 @@ find_package(glfw3 REQUIRED)
 add_executable(HeavenEngine
     src/main.cpp
     src/Application/Application.cpp
-    src/Rendering/Renderer2D/Renderer.cpp
-    src/Rendering/Renderer2D/Renderer2D.cpp
+    src/Rendering/2D/Renderer2D.cpp
     src/Rendering/Shader/Shader.cpp
+    src/Rendering/Buffer/VertexBuffer.cpp
+    src/Rendering/Buffer/IndexBuffer.cpp
+    src/Rendering/Buffer/VertexArray.cpp
+    src/Rendering/Mesh/Mesh.cpp
     external/glad/src/glad.c
 )
 

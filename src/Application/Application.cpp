@@ -3,7 +3,7 @@
 
 #include "Application.hpp"
 
-#include "../Rendering/Renderer2D/Renderer2D.hpp"
+#include "../Rendering/2D/Renderer2D.hpp"
 
 void window_size_callback(GLFWwindow* window, int width, int height) { glViewport(0, 0, width, height); }
 
