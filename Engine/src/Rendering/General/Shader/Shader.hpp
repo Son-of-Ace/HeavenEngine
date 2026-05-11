@@ -6,6 +6,8 @@
 
 class Shader {
  public:
+  unsigned int ID;
+
   Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
   ~Shader();
   void Use();
@@ -13,6 +15,5 @@ class Shader {
   void Bind();
 
  private:
-  unsigned int shaderProgram;
   unsigned int vertexShader, fragmentShader;
 };

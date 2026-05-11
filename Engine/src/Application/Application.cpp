@@ -5,7 +5,11 @@
 
 #include "../Rendering/2D/Renderer2D.hpp"
 
-void window_size_callback(GLFWwindow* window, int width, int height) { glViewport(0, 0, width, height); }
+using namespace HeavenEngine::Rendering::Engine2D;
+
+void window_size_callback(GLFWwindow* window, int width, int height) {
+  glViewport(0, 0, width, height);
+}
 
 void Application::Run() {
   if (!glfwInit()) {

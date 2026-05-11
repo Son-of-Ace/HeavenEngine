@@ -3,10 +3,12 @@
 #include <glad/glad.h>
 #include <cstddef>
 
-class IndexBuffer {
+namespace HeavenEngine::General::Buffer {
+
+class VertexBuffer {
  public:
-  IndexBuffer(std::size_t size, GLenum usage);
-  ~IndexBuffer();
+  VertexBuffer(std::size_t size, GLenum usage);
+  ~VertexBuffer();
 
   void SetData(GLenum target, size_t size, const GLvoid* data);
   void Bind(GLenum target);
@@ -17,3 +19,5 @@ class IndexBuffer {
   size_t m_size;
   GLenum m_usage;
 };
+
+}  // namespace HeavenEngine::General::Buffer

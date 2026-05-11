@@ -17,7 +17,7 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
 
   vertexShader = glCreateShader(GL_VERTEX_SHADER);
   fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-  shaderProgram = glCreateProgram();
+  ID = glCreateProgram();
 
   glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
   glCompileShader(vertexShader);
@@ -45,13 +45,13 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
     throw std::runtime_error(errorMsg);
   }
 
-  glAttachShader(shaderProgram, vertexShader);
-  glAttachShader(shaderProgram, fragmentShader);
-  glLinkProgram(shaderProgram);
+  glAttachShader(ID, vertexShader);
+  glAttachShader(ID, fragmentShader);
+  glLinkProgram(ID);
 
-  glGetProgramiv(shaderProgram, GL_LINK_STATUS, &succes);
+  glGetProgramiv(ID, GL_LINK_STATUS, &succes);
   if (!succes) {
-    glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+    glGetProgramInfoLog(ID, 512, NULL, infoLog);
 
     std::string errorMsg = "!!!RUNTIME ERROR!!! -> SHADER PROGRAM LINKING FAILED!\n";
     errorMsg += infoLog;
@@ -59,19 +59,16 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
     throw std::runtime_error(errorMsg);
   }
 
-  glUseProgram(vertexShader);
-  glUseProgram(fragmentShader);
-
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
 }
 
 void Shader::Use() {
-  glUseProgram(shaderProgram);
+  glUseProgram(ID);
 }
 
 void Shader::SetColor(const glm::vec4& color) {
-  GLint location = glGetUniformLocation(shaderProgram, "uColor");
+  GLint location = glGetUniformLocation(ID, "uColor");
   glUniform4f(location, color.r, color.g, color.b, color.a);
 }
 
@@ -79,5 +76,5 @@ void Shader::Bind() {
 }
 
 Shader::~Shader() {
-  glDeleteProgram(shaderProgram);
+  glDeleteProgram(ID);
 }
