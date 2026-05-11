@@ -1,7 +1,9 @@
 #pragma once
 
+#include <cstdint>
 #include <glm/ext/vector_float4.hpp>
 #include <glm/glm.hpp>
+#include <vector>
 
 #include "../Shader/Shader.hpp"
 #include "../Mesh/Mesh.hpp"
@@ -16,7 +18,7 @@ class Renderer2D {
 
   // Primitive Shapes
   void DrawQuad(const glm::vec2& pos, const glm::vec2& size, const glm::vec4& color);
-  void DrawTriangle();
+  void DrawTriangle(const glm::vec2& pos, const glm::vec2& size, const glm::vec4& color);
 
   // TODO:
   // Collects data on a CPU buffer. DOES NOT DRAW ANYTHING!
@@ -36,9 +38,13 @@ class Renderer2D {
   */
 
  private:
-  Mesh triangleOneMesh;
-  Mesh triangleTwoMesh;
-  Mesh triangleThreeMesh;
-
   Shader fragment;
+
+  VertexArray m_vao;
+  std::unique_ptr<VertexBuffer> m_vbo;
+  std::unique_ptr<IndexBuffer> m_ebo;
+
+  std::vector<float> vertices;
+  std::vector<float> indices;
+  uint32_t m_offset;
 };

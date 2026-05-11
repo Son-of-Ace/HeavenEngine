@@ -12,11 +12,11 @@ Mesh::Mesh(const float* vertices, size_t vertexBufferSize, const uint32_t* indic
     m_vao.Bind();
     m_vbo = std::make_unique<VertexBuffer>(vertexBufferSize, GL_STATIC_DRAW);
     m_vbo->Bind(GL_ARRAY_BUFFER);
-    m_vbo->SetData(GL_ARRAY_BUFFER, vertices);
+    m_vbo->SetData(GL_ARRAY_BUFFER, vertexBufferSize, vertices);
 
     m_ebo = std::make_unique<IndexBuffer>(indexCount * sizeof(uint32_t), GL_STATIC_DRAW);
     m_ebo->Bind(GL_ELEMENT_ARRAY_BUFFER);
-    m_ebo->SetData(GL_ELEMENT_ARRAY_BUFFER, indices);
+    m_ebo->SetData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices);
 
     // Positions
     m_vao.AddAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -33,7 +33,7 @@ Mesh::Mesh(const float* vertices, size_t vertexBufferSize, const uint32_t* indic
     m_vao.Bind();
     m_vbo = std::make_unique<VertexBuffer>(vertexBufferSize, GL_STATIC_DRAW);
     m_vbo->Bind(GL_ARRAY_BUFFER);
-    m_vbo->SetData(GL_ARRAY_BUFFER, vertices);
+    m_vbo->SetData(GL_ARRAY_BUFFER, vertexBufferSize, vertices);
 
     // Positions
     m_vao.AddAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);

@@ -8,7 +8,7 @@ class VertexBuffer {
   VertexBuffer(std::size_t size, GLenum usage);
   ~VertexBuffer();
 
-  void SetData(GLenum target, const GLvoid* data);
+  void SetData(GLenum target, size_t size, const GLvoid* data);
   void Bind(GLenum target);
   void Unbind(GLenum target);
 
