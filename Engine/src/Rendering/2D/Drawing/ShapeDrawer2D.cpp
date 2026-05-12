@@ -1,11 +1,13 @@
-#include <cmath>
 #include <cstdint>
+#include <glm/ext/matrix_float4x4.hpp>
 #include <vector>
 
-#include <glm/ext/matrix_float2x2.hpp>
-#include <glm/ext/vector_float2.hpp>
+#include <glm/ext/matrix_float4x4.hpp>
 #include <glm/ext/vector_float3.hpp>
 #include <glm/ext/vector_float4.hpp>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/euler_angles.hpp>
 
 #include "ShapeDrawer2D.hpp"
 
@@ -19,15 +21,15 @@ std::vector<uint32_t>& ShapeDrawer::GetIndices() {
   return indices;
 }
 
-void ShapeDrawer::DrawQuad(const Transform2D& transform, const Material& material) {
+void ShapeDrawer::DrawQuad(const Transform& transform, const Material& material) {
   uint32_t offset = vertices.size() / 9;
 
   // clang-format off
-  glm::vec2 local[4] = {
-      { -0.5f, -0.5f },
-      {  0.5f, -0.5f },
-      {  0.5f,  0.5f },
-      { -0.5f,  0.5f }
+  glm::vec3 local[4] = {
+      { -0.5f, -0.5f, 0.0f },
+      {  0.5f, -0.5f, 0.0f },
+      {  0.5f,  0.5f, 0.0f },
+      { -0.5f,  0.5f, 0.0f }
   };
 
   glm::vec4 colors[4] = {
@@ -44,22 +46,21 @@ void ShapeDrawer::DrawQuad(const Transform2D& transform, const Material& materia
     { 0.0f, 1.0f }
   };
 
-  glm::mat2 rot = {
-    { cos(transform.rotation), -sin(transform.rotation) },
-    { sin(transform.rotation),  cos(transform.rotation) },
-  };
+  glm::mat4 rotationMatrix = glm::eulerAngleXYZ(transform.rotation.x, transform.rotation.y, -transform.rotation.z);
   // clang-format on
 
   for (int i = 0; i < 4; i++) {
-    glm::vec2 vertexPos = local[i];
+    glm::vec3 vertexPos = local[i];
     glm::vec4 vertexColor = colors[i];
     glm::vec2 uvPos = uvs[i];
 
-    glm::vec2 world = transform.position + rot * (vertexPos * transform.scale);
+    glm::vec3 scaled = vertexPos * transform.scale;
+    glm::vec4 rotated = rotationMatrix * glm::vec4(scaled, 1.0f);
+    glm::vec3 world = transform.position + glm::vec3(rotated);
 
     vertices.push_back(world.x);
     vertices.push_back(world.y);
-    vertices.push_back(0.0f);
+    vertices.push_back(world.z);
 
     vertices.push_back(vertexColor.r);
     vertices.push_back(vertexColor.g);

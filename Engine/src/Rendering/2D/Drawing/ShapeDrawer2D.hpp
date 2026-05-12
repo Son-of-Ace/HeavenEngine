@@ -7,17 +7,18 @@
 #include <glm/ext/vector_float3.hpp>
 #include <glm/ext/vector_float4.hpp>
 
-#include "../Transform2D.hpp"
+#include "../../General/Transform/Transform.hpp"
 #include "../../General/Material/Material.hpp"
 
 using namespace HeavenEngine::General::Material;
+using namespace HeavenEngine::General::Transform;
 
 namespace HeavenEngine::Rendering::Engine2D {
 
 class ShapeDrawer {
  public:
-  void DrawQuad(const Transform2D& transform, const Material& material);
-  void DrawTriangle(const Transform2D& transform);
+  void DrawQuad(const Transform& transform, const Material& material);
+  void DrawTriangle(const Transform& transform);
 
   std::vector<float>& GetVertices();
   std::vector<uint32_t>& GetIndices();

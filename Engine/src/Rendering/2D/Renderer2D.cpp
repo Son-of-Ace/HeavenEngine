@@ -8,6 +8,9 @@
 #include "Drawing/ShapeDrawer2D.hpp"
 
 #include "../../Utils/RGB.hpp"
+#include "../General/Transform/Transform.hpp"
+
+using namespace HeavenEngine::General::Transform;
 
 namespace HeavenEngine::Rendering::Engine2D {
 
@@ -19,10 +22,10 @@ Renderer2D::Renderer2D()
 ShapeDrawer sd;
 
 // Transforms
-Transform2D quadTransform1;
+Transform quadTransform1;
 Material quadMat1;
 
-Transform2D quadTransform2;
+Transform quadTransform2;
 Material quadMat2;
 
 // Rendering
@@ -65,16 +68,16 @@ void Renderer2D::Init() {
   m_vao.EnableAttribute(2);
 
   // Transforms
-  quadTransform1.position = {-0.5f, 0.0f};
-  quadTransform1.rotation = glm::radians(0.0f);
-  quadTransform1.scale = {1.0f, 2.0f};
+  quadTransform1.position = {-0.5f, 0.0f, 0.0f};
+  quadTransform1.rotation = {glm::radians(0.0f), glm::radians(0.0f), glm::radians(0.0f)};
+  quadTransform1.scale = {1.0f, 2.0f, 0.0f};
 
   quadMat1.color = RGB::rgb(0, 123, 255);
   quadMat1.textureID = 0;
 
-  quadTransform2.position = {0.5f, 0.0f};
-  quadTransform2.rotation = glm::radians(0.0f);
-  quadTransform2.scale = {1.0f, 2.0f};
+  quadTransform2.position = {0.5f, 0.0f, 0.0f};
+  quadTransform2.rotation = {glm::radians(0.0f), glm::radians(0.0f), glm::radians(0.0f)};
+  quadTransform2.scale = {1.0f, 2.0f, 0.0f};
 
   quadMat2.color = RGB::rgb(157, 0, 255);
   quadMat2.textureID = 0;
