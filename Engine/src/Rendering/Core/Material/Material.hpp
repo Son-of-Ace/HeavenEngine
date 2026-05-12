@@ -1,5 +1,6 @@
-#include <cstdint>
+#pragma once
 
+#include <cstdint>
 #include <glm/ext/vector_float4.hpp>
 
 namespace HeavenEngine::General::Material {

@@ -11,26 +11,14 @@ find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm CONFIG REQUIRED)
 
-add_executable(HeavenEngine
-    # Main
-    Engine/src/main.cpp
-    Engine/src/Application/Application.cpp
 
-    # 2D
-    Engine/src/Rendering/2D/Renderer2D.cpp
-    Engine/src/Rendering/2D/Drawing/ShapeDrawer2D.cpp
+# finds all .h and .cpp files. also compiles "glad.c".
+file(GLOB_RECURSE SOURCES
+    "Engine/*.hpp"
+    "Engine/*.cpp"
+)
 
-    # Buffers
-    Engine/src/Rendering/General/Buffer/VertexBuffer.cpp
-    Engine/src/Rendering/General/Buffer/IndexBuffer.cpp
-    Engine/src/Rendering/General/Buffer/VertexArray.cpp
-
-    # Shader
-    Engine/src/Rendering/General/Shader/Shader.cpp
-
-    # Utils
-    Engine/src/Utils/RGB.cpp
-
+add_executable(HeavenEngine ${SOURCES}
     # External
     Engine/external/glad/src/glad.c
 )
@@ -44,6 +32,8 @@ add_custom_command(TARGET HeavenEngine POST_BUILD
 
 target_include_directories(HeavenEngine PRIVATE
     Engine/external/glad/include
+    Engine/src/Rendering/Core
+    Engine/src
 )
 
 target_link_libraries(HeavenEngine

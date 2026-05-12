@@ -7,8 +7,8 @@
 #include "Renderer2D.hpp"
 #include "Drawing/ShapeDrawer2D.hpp"
 
-#include "../../Utils/RGB.hpp"
-#include "../General/Transform/Transform.hpp"
+#include "Utils/RGB.hpp"
+#include "Transform/Transform.hpp"
 
 using namespace HeavenEngine::General::Transform;
 

@@ -9,6 +9,13 @@ Low Level:
  
 ---
 
+### Game Structure:
+Game Interface:
+ - Update
+ - Render
+
+---
+
 ### TODO:
 Scene:
 - Scene

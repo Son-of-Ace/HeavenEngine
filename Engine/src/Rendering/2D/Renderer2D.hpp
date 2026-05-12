@@ -2,11 +2,11 @@
 
 #include <memory>
 
-#include "../General/Shader/Shader.hpp"
+#include "Shader/Shader.hpp"
 
-#include "../General/Buffer/VertexArray.hpp"
-#include "../General/Buffer/VertexBuffer.hpp"
-#include "../General/Buffer/IndexBuffer.hpp"
+#include "Buffer/VertexArray.hpp"
+#include "Buffer/VertexBuffer.hpp"
+#include "Buffer/IndexBuffer.hpp"
 
 using namespace HeavenEngine::General::Buffer;
 

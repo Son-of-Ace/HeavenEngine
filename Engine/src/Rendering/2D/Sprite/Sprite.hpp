@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../General/Material/Material.hpp"
-#include "../../General/Transform/Transform.hpp"
+#include "Material/Material.hpp"
+#include "Transform/Transform.hpp"
 
 using namespace HeavenEngine::General::Material;
 using namespace HeavenEngine::General::Transform;
