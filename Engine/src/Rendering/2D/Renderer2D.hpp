@@ -3,14 +3,14 @@
 #include <memory>
 
 #include "Shader/Shader.hpp"
+#include "Components/Transform.hpp"
+#include "Material/Material.hpp"
 
 #include "Buffer/VertexArray.hpp"
 #include "Buffer/VertexBuffer.hpp"
 #include "Buffer/IndexBuffer.hpp"
 
-using namespace HeavenEngine::General::Buffer;
-
-namespace HeavenEngine::Rendering::Engine2D {
+namespace HE::Renderer {
 
 class Renderer2D {
  public:
@@ -18,17 +18,18 @@ class Renderer2D {
   Renderer2D();
 
   void Init();
-  void Render();
 
   void BeginFrame();
   void EndFrame();
 
- private:
-  Shader fragment;
+  void SubmitQuad(HE::Core::Transform& transform, HE::Core::Material& material);
 
-  VertexArray m_vao;
-  std::unique_ptr<VertexBuffer> m_vbo;
-  std::unique_ptr<IndexBuffer> m_ebo;
+ private:
+  HE::Core::Shader fragment;
+
+  HE::Core::VertexArray m_vao;
+  std::unique_ptr<HE::Core::VertexBuffer> m_vbo;
+  std::unique_ptr<HE::Core::IndexBuffer> m_ebo;
 };
 
-}  // namespace HeavenEngine::Rendering::Engine2D
+}  // namespace HE::Renderer

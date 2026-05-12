@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 
+namespace HE::Core {
+
 static std::string LoadShader(const std::string& filePath) {
   std::ifstream file(filePath);
 
@@ -16,3 +18,5 @@ static std::string LoadShader(const std::string& filePath) {
   buffer << file.rdbuf();
   return buffer.str();
 }
+
+}  // namespace HE::Core

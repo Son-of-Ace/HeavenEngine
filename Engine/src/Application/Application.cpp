@@ -1,11 +1,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "../../../FlappyBird/FlappyBird.hpp"
+
 #include "Application.hpp"
 
 #include "../Rendering/2D/Renderer2D.hpp"
-
-using namespace HeavenEngine::Rendering::Engine2D;
+#include "GameTools/Game.hpp"
 
 void window_size_callback(GLFWwindow* window, int width, int height) {
   glViewport(0, 0, width, height);
@@ -32,15 +33,28 @@ void Application::Run() {
   glfwSetWindowSizeCallback(window, window_size_callback);
   glClearColor(0.0, 0.0, 0.0, 1);
 
-  Renderer2D renderer2D;
+  HE::Renderer::Renderer2D renderer2D;
   renderer2D.Init();
 
+  // Set the game to be played
+  Game* game = new FlappyBird;
+
+  game->Init();
+
   while (!glfwWindowShouldClose(window)) {
-    renderer2D.Render();
+    game->Update();
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    renderer2D.BeginFrame();
+    game->Render(renderer2D);
+    renderer2D.EndFrame();
+
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
 
+  delete game;
   glfwTerminate();
   return;
 }

@@ -5,6 +5,8 @@
 #include "Shader.hpp"
 #include "ShaderUtils.hpp"
 
+namespace HE::Core {
+
 Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) {
   const std::string vertexShaderLoad = LoadShader(vertexShaderPath);
   const std::string fragmentShaderLoad = LoadShader(fragmentShaderPath);
@@ -78,3 +80,5 @@ void Shader::Bind() {
 Shader::~Shader() {
   glDeleteProgram(ID);
 }
+
+}  // namespace HE::Core

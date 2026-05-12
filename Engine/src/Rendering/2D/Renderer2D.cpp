@@ -5,28 +5,20 @@
 #include <memory>
 
 #include "Renderer2D.hpp"
-#include "Drawing/ShapeDrawer2D.hpp"
+#include "Material/Material.hpp"
+#include "ShapeDrawer2D.hpp"
 
 #include "Utils/RGB.hpp"
-#include "Transform/Transform.hpp"
+#include "Components/Transform.hpp"
 
-using namespace HeavenEngine::General::Transform;
-
-namespace HeavenEngine::Rendering::Engine2D {
+namespace HE::Renderer {
 
 // clang-format off
 Renderer2D::Renderer2D()
-    : fragment("shaders/Vertex.glsl", "shaders/Fragment.glsl") {}
+    : fragment("Engine/shaders/Vertex.glsl", "Engine/shaders/Fragment.glsl") {}
 // clang-format on
 
 ShapeDrawer sd;
-
-// Transforms
-Transform quadTransform1;
-Material quadMat1;
-
-Transform quadTransform2;
-Material quadMat2;
 
 // Rendering
 void Renderer2D::BeginFrame() {
@@ -49,10 +41,10 @@ void Renderer2D::Init() {
   m_vao.Bind();
 
   // Reserve 40 kb's worth of indice and vertice data on the GPU
-  m_ebo = std::make_unique<IndexBuffer>(10000 * sizeof(uint32_t), GL_DYNAMIC_DRAW);
+  m_ebo = std::make_unique<HE::Core::IndexBuffer>(10000 * sizeof(uint32_t), GL_DYNAMIC_DRAW);
   m_ebo->Bind(GL_ELEMENT_ARRAY_BUFFER);
 
-  m_vbo = std::make_unique<VertexBuffer>(10000 * sizeof(float), GL_DYNAMIC_DRAW);
+  m_vbo = std::make_unique<HE::Core::VertexBuffer>(10000 * sizeof(float), GL_DYNAMIC_DRAW);
   m_vbo->Bind(GL_ARRAY_BUFFER);
 
   // Position
@@ -66,35 +58,11 @@ void Renderer2D::Init() {
   // UVs
   m_vao.AddAttribute(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(7 * sizeof(float)));
   m_vao.EnableAttribute(2);
-
-  // Transforms
-  quadTransform1.position = {-0.5f, 0.0f, 0.0f};
-  quadTransform1.rotation = {glm::radians(0.0f), glm::radians(0.0f), glm::radians(0.0f)};
-  quadTransform1.scale = {1.0f, 2.0f, 0.0f};
-
-  quadMat1.color = RGB::rgb(0, 123, 255);
-  quadMat1.textureID = 0;
-
-  quadTransform2.position = {0.5f, 0.0f, 0.0f};
-  quadTransform2.rotation = {glm::radians(0.0f), glm::radians(0.0f), glm::radians(0.0f)};
-  quadTransform2.scale = {1.0f, 2.0f, 0.0f};
-
-  quadMat2.color = RGB::rgb(157, 0, 255);
-  quadMat2.textureID = 0;
 }
 
-void Renderer2D::Render() {
-  glClear(GL_COLOR_BUFFER_BIT);
-  glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-  BeginFrame();
-
-  sd.DrawQuad(quadTransform1, quadMat1);
-  sd.DrawQuad(quadTransform2, quadMat2);
-
-  EndFrame();
+// Test (Temporary)
+void Renderer2D::SubmitQuad(HE::Core::Transform& transform, HE::Core::Material& material) {
+  sd.DrawQuad(transform, material);
 }
 
-}  // namespace HeavenEngine::Rendering::Engine2D
+}  // namespace HE::Renderer

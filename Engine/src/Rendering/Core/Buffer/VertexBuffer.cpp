@@ -1,7 +1,7 @@
 #include "VertexBuffer.hpp"
 #include <cstddef>
 
-namespace HeavenEngine::General::Buffer {
+namespace HE::Core {
 
 VertexBuffer::VertexBuffer(size_t size, GLenum usage) : m_size(size), m_usage(usage) {
   glGenBuffers(1, &m_id);
@@ -23,4 +23,4 @@ void VertexBuffer::SetData(GLenum target, size_t size, const GLvoid* data) {
   glBufferData(target, size, data, m_usage);
 }
 
-}  // namespace HeavenEngine::General::Buffer
+}  // namespace HE::Core

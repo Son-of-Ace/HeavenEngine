@@ -1,6 +1,6 @@
 #include "VertexArray.hpp"
 
-namespace HeavenEngine::General::Buffer {
+namespace HE::Core {
 
 VertexArray::VertexArray() {
   glGenVertexArrays(1, &m_id);
@@ -27,4 +27,4 @@ void VertexArray::Unbind() {
   glBindVertexArray(0);
 }
 
-}  // namespace HeavenEngine::General::Buffer
+}  // namespace HE::Core

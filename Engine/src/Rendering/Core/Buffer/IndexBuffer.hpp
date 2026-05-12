@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <cstddef>
 
-namespace HeavenEngine::General::Buffer {
+namespace HE::Core {
 
 class IndexBuffer {
  public:
@@ -20,4 +20,4 @@ class IndexBuffer {
   GLenum m_usage;
 };
 
-}  // namespace HeavenEngine::General::Buffer
+}  // namespace HE::Core

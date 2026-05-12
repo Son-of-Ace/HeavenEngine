@@ -21,14 +21,9 @@ file(GLOB_RECURSE SOURCES
 add_executable(HeavenEngine ${SOURCES}
     # External
     Engine/external/glad/src/glad.c
-)
 
-add_custom_command(TARGET HeavenEngine POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_SOURCE_DIR}/Engine/shaders
-    ${CMAKE_BINARY_DIR}/shaders
+    FlappyBird/FlappyBird.cpp
 )
-
 
 target_include_directories(HeavenEngine PRIVATE
     Engine/external/glad/include

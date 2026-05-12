@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-namespace HeavenEngine::General::Buffer {
+namespace HE::Core {
 
 class VertexArray {
  public:
@@ -18,4 +18,4 @@ class VertexArray {
   GLuint m_id;
 };
 
-}  // namespace HeavenEngine::General::Buffer
+}  // namespace HE::Core
