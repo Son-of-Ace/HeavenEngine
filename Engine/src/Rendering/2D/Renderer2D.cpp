@@ -8,7 +8,6 @@
 #include "Material/Material.hpp"
 #include "ShapeDrawer2D.hpp"
 
-#include "Utils/RGB.hpp"
 #include "Components/Transform.hpp"
 
 namespace HE::Renderer {

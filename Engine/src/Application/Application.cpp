@@ -42,9 +42,9 @@ void Application::Run() {
   game->Init();
 
   while (!glfwWindowShouldClose(window)) {
-    game->Update();
-
     glClear(GL_COLOR_BUFFER_BIT);
+
+    game->Update();
 
     renderer2D.BeginFrame();
     game->Render(renderer2D);

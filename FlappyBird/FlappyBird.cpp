@@ -12,6 +12,8 @@ void FlappyBird::Init() {
 }
 
 void FlappyBird::Update() {
+  birdTransform.position.y -= 0.001f;
+  birdTransform.rotation.z += 0.008f;
 }
 
 void FlappyBird::Render(HE::Renderer::Renderer2D& renderer) {
