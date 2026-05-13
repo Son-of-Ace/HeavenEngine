@@ -3,7 +3,8 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "GameObject/GameObject.hpp"
+
+#include "Core/GameObject/GameObject.hpp"
 
 namespace HE::Core {
 

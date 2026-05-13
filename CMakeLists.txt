@@ -27,7 +27,8 @@ add_executable(HeavenEngine ${SOURCES}
 
 target_include_directories(HeavenEngine PRIVATE
     Engine/external/glad/include
-    Engine/src/Rendering/Core
+    Engine/src/Rendering
+    Engine/src/Core
     Engine/src
 )
 

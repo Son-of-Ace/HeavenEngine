@@ -1,5 +1,4 @@
 #include "IndexBuffer.hpp"
-#include <cstddef>
 
 namespace HE::Core {
 

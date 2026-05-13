@@ -6,7 +6,7 @@
 #include "Application.hpp"
 
 #include "../Rendering/2D/Renderer2D.hpp"
-#include "GameTools/Game.hpp"
+#include "../../Engine/GameTools/Game.hpp"
 
 void window_size_callback(GLFWwindow* window, int width, int height) {
   glViewport(0, 0, width, height);

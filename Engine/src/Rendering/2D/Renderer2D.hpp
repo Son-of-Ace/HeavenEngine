@@ -2,13 +2,13 @@
 
 #include <memory>
 
-#include "Shader/Shader.hpp"
-#include "Components/Transform.hpp"
-#include "Material/Material.hpp"
+#include "Core/Shader/Shader.hpp"
+#include "Core/Components/Transform.hpp"
+#include "Core/Material/Material.hpp"
 
-#include "Buffer/VertexArray.hpp"
-#include "Buffer/VertexBuffer.hpp"
-#include "Buffer/IndexBuffer.hpp"
+#include "Core/Buffer/VertexArray.hpp"
+#include "Core/Buffer/VertexBuffer.hpp"
+#include "Core/Buffer/IndexBuffer.hpp"
 
 namespace HE::Renderer {
 

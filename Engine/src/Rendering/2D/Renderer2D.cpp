@@ -5,10 +5,7 @@
 #include <memory>
 
 #include "Renderer2D.hpp"
-#include "Material/Material.hpp"
 #include "ShapeDrawer2D.hpp"
-
-#include "Components/Transform.hpp"
 
 namespace HE::Renderer {
 

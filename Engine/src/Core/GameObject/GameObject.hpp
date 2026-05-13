@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "Components/Component.hpp"
+#include "Core/Components/Component.hpp"
 
 namespace HE::Core {
 

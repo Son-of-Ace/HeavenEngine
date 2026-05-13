@@ -1,5 +1,4 @@
 #include "VertexBuffer.hpp"
-#include <cstddef>
 
 namespace HE::Core {
 

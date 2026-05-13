@@ -7,8 +7,8 @@
 #include <glm/ext/vector_float3.hpp>
 #include <glm/ext/vector_float4.hpp>
 
-#include "Components/Transform.hpp"
-#include "Material/Material.hpp"
+#include "Core/Components/Transform.hpp"
+#include "Core/Material/Material.hpp"
 
 namespace HE::Renderer {
 
