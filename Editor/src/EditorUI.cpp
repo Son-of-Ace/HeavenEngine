@@ -8,10 +8,10 @@ void EditorUI::Init(GLFWwindow* window) {
   m_InspectorPanel.Init();
   m_ProjectPanel.Init();
   m_SceneHierarchyPanel.Init();
-  m_ToolbarPanel.Init();
   m_ConsolePanel.Init();
   m_MenubarPanel.Init();
   m_ViewportPanel.Init();
+  m_ToolbarPanel.Init();
 }
 
 void EditorUI::BeginFrame() {

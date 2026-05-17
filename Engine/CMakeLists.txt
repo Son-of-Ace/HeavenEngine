@@ -10,6 +10,7 @@ target_include_directories(HeavenEngineLib
     PUBLIC  include          # exposed to anyone linking this
             external/glad/include
     PRIVATE src              # internal only
+            external/stb
 )
 
 target_link_libraries(HeavenEngineLib
