@@ -1,12 +1,13 @@
 #pragma once
 
+#include <Color.hpp>
 #include <cstdint>
 #include <glm/ext/vector_float4.hpp>
 
 namespace HE {
 
 struct Material {
-  glm::vec4 color;
+  Color color;
   uint32_t textureID;
 };
 

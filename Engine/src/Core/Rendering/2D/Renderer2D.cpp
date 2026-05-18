@@ -62,7 +62,7 @@ void Renderer2D::Init() {
   m_vao.EnableAttribute(2);
 }
 
-void Renderer2D::DrawLine(glm::vec3 start, glm::vec3 end, glm::vec4 color) {
+void Renderer2D::DrawLine(glm::vec3 start, glm::vec3 end, Color color) {
   m_Sd.DrawLine(start, end, color);
 }
 

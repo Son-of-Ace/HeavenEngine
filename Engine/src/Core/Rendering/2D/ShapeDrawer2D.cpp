@@ -42,7 +42,7 @@ void ShapeDrawer::DrawQuad(const HE::Transform& transform, const HE::Material& m
       { -0.5f,  0.5f, 0.0f }
   };
 
-  glm::vec4 colors[4] = {
+  Color colors[4] = {
     material.color,
     material.color,
     material.color,
@@ -61,7 +61,7 @@ void ShapeDrawer::DrawQuad(const HE::Transform& transform, const HE::Material& m
 
   for (int i = 0; i < 4; i++) {
     glm::vec3 vertexPos = local[i];
-    glm::vec4 vertexColor = colors[i];
+    Color vertexColor = colors[i];
     glm::vec2 uvPos = uvs[i];
 
     glm::vec3 scaled = vertexPos * transform.scale;
@@ -92,7 +92,7 @@ void ShapeDrawer::DrawQuad(const HE::Transform& transform, const HE::Material& m
   m_TriangleIndexCount = 6;
 }
 
-void ShapeDrawer::DrawLine(glm::vec3 start, glm::vec3 end, glm::vec4 color) {
+void ShapeDrawer::DrawLine(glm::vec3 start, glm::vec3 end, Color color) {
   uint32_t offset = m_Vertices.size() / 9;
 
   auto pushVertex = [&](glm::vec3 pos) {

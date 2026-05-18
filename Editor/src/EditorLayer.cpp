@@ -10,7 +10,7 @@ Transform quadTrans;
 Material quadMat;
 
 void DrawGrid(Renderer& renderer, const float aspect, const float size) {
-  glm::vec4 gridColor = RGBA::rgba(80, 80, 80, 0.7f);
+  Color gridColor = ColorFromRGB(80, 80, 80, 0.7f);
 
   float xExtent = aspect * size;
   float yExtent = size;
@@ -38,7 +38,7 @@ void EditorLayer::OnStart(GLFWwindow* window) {
   quadTrans.position = {0.0f, 0.0f, 0.0f};
   quadTrans.scale = {1.0f, 1.0f, 0.0f};
 
-  quadMat.color = RGBA::rgba(255, 120, 0);
+  quadMat.color = ColorFromRGB(255, 120, 0);
 }
 
 void EditorLayer::OnUpdate(float dt) {

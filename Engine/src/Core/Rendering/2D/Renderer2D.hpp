@@ -23,7 +23,7 @@ class Renderer2D : public Renderer {
 
   void BeginFrame(const glm::mat4& viewProjection) override;
   void EndFrame() override;
-  void DrawLine(glm::vec3 start, glm::vec3 end, glm::vec4 color) override;
+  void DrawLine(glm::vec3 start, glm::vec3 end, Color color) override;
   void DrawQuad(const Transform& transform, const Material& material) override;
 
  private:

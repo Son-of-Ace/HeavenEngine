@@ -8,14 +8,14 @@
 
 #include "FrameBuffer.hpp"
 
-#include "RGBA.hpp"
+#include "Color.hpp"
 
 namespace HE::Editor {
 
 class ViewportPanel : public EditorPanel {
  public:
   void Init() override {
-    glm::vec4 vpColor = RGBA::rgba(50, 50, 50);
+    Color vpColor = ColorFromRGB(50, 50, 50);
     glClearColor(vpColor.r, vpColor.g, vpColor.b, vpColor.a);
     m_FrameBuffer.Create(1, 1);
   }

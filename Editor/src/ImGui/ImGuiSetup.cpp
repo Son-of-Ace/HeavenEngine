@@ -1,4 +1,5 @@
 #include <imgui.h>
+#include <ImGuiConversions.hpp>
 
 #include "ImGuiSetup.hpp"
 
@@ -17,20 +18,20 @@ void ImGuiSetup::Init(GLFWwindow* window, EditorSettings& settings) {
   style.FramePadding = ImVec2(10.0f, 6.0f);
   style.WindowBorderSize = 0.0f;
 
-  style.Colors[ImGuiCol_WindowBg] = settings.windowBGColor;
-  style.Colors[ImGuiCol_MenuBarBg] = settings.menuBarColor;
+  style.Colors[ImGuiCol_WindowBg] = ToImVec4(settings.windowBGColor);
+  style.Colors[ImGuiCol_MenuBarBg] = ToImVec4(settings.menuBarColor);
 
-  style.Colors[ImGuiCol_Tab] = settings.tabColor;
-  style.Colors[ImGuiCol_TabSelected] = settings.selectedTabColor;
-  style.Colors[ImGuiCol_TabDimmed] = settings.tabColor;
-  style.Colors[ImGuiCol_TabDimmedSelected] = settings.tabColor;
+  style.Colors[ImGuiCol_Tab] = ToImVec4(settings.tabColor);
+  style.Colors[ImGuiCol_TabSelected] = ToImVec4(settings.selectedTabColor);
+  style.Colors[ImGuiCol_TabDimmed] = ToImVec4(settings.tabColor);
+  style.Colors[ImGuiCol_TabDimmedSelected] = ToImVec4(settings.tabColor);
 
-  style.Colors[ImGuiCol_TabDimmedSelectedOverline] = settings.tabOverlineColor;
-  style.Colors[ImGuiCol_TabSelectedOverline] = settings.tabOverlineColorSelected;
+  style.Colors[ImGuiCol_TabDimmedSelectedOverline] = ToImVec4(settings.tabOverlineColor);
+  style.Colors[ImGuiCol_TabSelectedOverline] = ToImVec4(settings.tabOverlineSelectedColor);
 
-  style.Colors[ImGuiCol_TabHovered] = settings.tabHover;
-  style.Colors[ImGuiCol_TitleBg] = settings.titleBg;
-  style.Colors[ImGuiCol_TitleBgActive] = settings.titleBgSelected;
+  style.Colors[ImGuiCol_TabHovered] = ToImVec4(settings.tabHoverColor);
+  style.Colors[ImGuiCol_TitleBg] = ToImVec4(settings.titleBgColor);
+  style.Colors[ImGuiCol_TitleBgActive] = ToImVec4(settings.titleBgSelectedColor);
 
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init("#version 330");

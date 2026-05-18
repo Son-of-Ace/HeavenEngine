@@ -15,7 +15,7 @@ namespace HE {
 class ShapeDrawer {
  public:
   void DrawQuad(const HE::Transform& transform, const HE::Material& material);
-  void DrawLine(glm::vec3 start, glm::vec3 end, glm::vec4 color);
+  void DrawLine(glm::vec3 start, glm::vec3 end, Color color);
 
   void Clear();
 
