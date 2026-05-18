@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <string>
-#include <vector>
 
 #include "GameObject.hpp"
 
@@ -13,11 +12,11 @@ class Scene {
   Scene();
 
   GameObject CreateObject(const std::string& objectName);
-  const std::string GetSceneID() const;
+  void DeleteObject(uint64_t objectID);
 
  private:
-  std::vector<std::shared_ptr<GameObject>> m_SceneObjects;
-  std::string m_SceneID;
+  std::unordered_map<uint64_t, std::shared_ptr<GameObject>> m_SceneObjects;
+  uint64_t m_CurrentID;
 };
 
 }  // namespace HE

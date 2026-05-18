@@ -7,6 +7,8 @@ set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm CONFIG REQUIRED)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
 add_subdirectory(Engine)
 add_subdirectory(Editor)
+add_subdirectory(Launcher)

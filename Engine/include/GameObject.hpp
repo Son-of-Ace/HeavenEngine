@@ -11,27 +11,35 @@ namespace HE {
 
 class GameObject {
  public:
+  GameObject() = default;
   GameObject(const std::string& objecName) {
     AddComponent<Transform>();
-    name = objecName;
+    m_Name = objecName;
   }
-
-  std::string name;
 
   Transform& transform() {
     return *GetComponent<Transform>();
+  }
+
+  uint64_t GetID() {
+    return m_ID;
+  }
+
+  void SetID() {
+    m_CurrentID++;
+    m_ID = m_CurrentID;
   }
 
   template <typename T>
   std::shared_ptr<T> AddComponent() {
     std::type_index id = typeid(T);
 
-    if (components.contains(id)) {
+    if (m_Components.contains(id)) {
       return nullptr;
     }
 
     std::shared_ptr<T> comp = std::make_shared<T>();
-    components[id] = comp;
+    m_Components[id] = comp;
 
     return comp;
   }
@@ -39,15 +47,15 @@ class GameObject {
   template <typename T>
   void RemoveComponent() {
     std::type_index id = typeid(T);
-    components.erase(id);
+    m_Components.erase(id);
   }
 
   template <typename T>
   std::shared_ptr<T> GetComponent() {
     std::type_index id = typeid(T);
 
-    auto it = components.find(id);
-    if (it == components.end()) {
+    auto it = m_Components.find(id);
+    if (it == m_Components.end()) {
       return nullptr;
     }
 
@@ -57,11 +65,14 @@ class GameObject {
   template <typename T>
   bool HasComponent() {
     std::type_index id = typeid(T);
-    return components.contains(id);
+    return m_Components.contains(id);
   }
 
  private:
-  std::unordered_map<std::type_index, std::shared_ptr<Component>> components;
+  std::unordered_map<std::type_index, std::shared_ptr<Component>> m_Components;
+  uint64_t m_ID;
+  uint64_t m_CurrentID;
+  std::string m_Name;
 };
 
 }  // namespace HE
