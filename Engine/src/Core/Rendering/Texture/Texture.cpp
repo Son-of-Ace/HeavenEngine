@@ -24,6 +24,8 @@ Texture::Texture(const std::string& path) {
 
   glGenTextures(1, &m_ID);
   glBindTexture(GL_TEXTURE_2D, m_ID);
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -36,6 +38,30 @@ Texture::Texture(const std::string& path) {
 
 Texture::~Texture() {
   if (m_ID) glDeleteTextures(1, &m_ID);
+}
+
+Texture::Texture(Texture&& other) noexcept {
+  m_ID = other.m_ID;
+  m_Width = other.m_Width;
+  m_Height = other.m_Height;
+
+  other.m_ID = 0;
+}
+
+Texture& Texture::operator=(Texture&& other) noexcept {
+  if (this != &other) {
+    if (m_ID) {
+      glDeleteTextures(1, &m_ID);
+    }
+
+    m_ID = other.m_ID;
+    m_Width = other.m_Width;
+    m_Height = other.m_Height;
+
+    other.m_ID = 0;
+  }
+
+  return *this;
 }
 
 void Texture::Bind(uint32_t slot) const {

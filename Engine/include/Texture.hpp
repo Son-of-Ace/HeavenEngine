@@ -12,6 +12,12 @@ class Texture {
   Texture(const std::string& path);
   ~Texture();
 
+  Texture(const Texture&) = delete;
+  Texture& operator=(const Texture&) = delete;
+
+  Texture(Texture&& other) noexcept;
+  Texture& operator=(Texture&& other) noexcept;
+
   void Bind(uint32_t slot = 0) const;
   void Unbind() const;
 
