@@ -7,6 +7,9 @@
 namespace HE::Editor {
 
 Transform quadTrans;
+Transform quadTrans2;
+Transform quadTrans3;
+
 Material quadMat;
 
 void DrawGrid(Renderer& renderer, const float aspect, const float size) {
@@ -35,10 +38,16 @@ AppConfig EditorLayer::GetAppConfig() {
 void EditorLayer::OnStart(GLFWwindow* window) {
   m_EditorUI.Init(window);
 
-  quadTrans.position = {0.0f, 0.0f, 0.0f};
+  quadTrans.position = {0.0f, -4.5f, 0.0f};
   quadTrans.scale = {1.0f, 1.0f, 0.0f};
 
-  quadMat.color = ColorFromRGB(255, 120, 0);
+  quadTrans2.position = {1.0f, -4.5f, 0.0f};
+  quadTrans2.scale = {1.0f, 1.0f, 0.0f};
+
+  quadTrans3.position = {2.0f, -4.5f, 0.0f};
+  quadTrans3.scale = {1.0f, 1.0f, 0.0f};
+
+  quadMat.color = ColorFromRGB(80, 40, 0);
 }
 
 void EditorLayer::OnUpdate(float dt) {
@@ -51,6 +60,9 @@ void EditorLayer::OnRender(Renderer& renderer) {
   m_EditorUI.PreRenderViewport(m_EditorCamera);
 
   renderer.BeginFrame(m_EditorCamera.GetViewProjection());
+  renderer.DrawQuad(quadTrans, quadMat);
+  renderer.DrawQuad(quadTrans2, quadMat);
+  renderer.DrawQuad(quadTrans3, quadMat);
   DrawGrid(renderer, m_EditorCamera.GetAspect(), m_EditorCamera.GetSize());
   renderer.EndFrame();
 

@@ -21,9 +21,6 @@ void Renderer2D::EndFrame() {
   shader.Use();
   shader.SetMat4("u_ViewProjection", m_ViewProjection);
 
-  glDisable(GL_SCISSOR_TEST);
-  glDisable(GL_BLEND);
-
   m_vao.Bind();
 
   m_ebo->SetData(m_Sd.GetIndices().size() * sizeof(uint32_t), m_Sd.GetIndices().data());

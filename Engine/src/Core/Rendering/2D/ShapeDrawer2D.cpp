@@ -89,7 +89,7 @@ void ShapeDrawer::DrawQuad(const HE::Transform& transform, const HE::Material& m
   m_Indices.push_back(offset + 0);
   m_Indices.push_back(offset + 2);
   m_Indices.push_back(offset + 3);
-  m_TriangleIndexCount = 6;
+  m_TriangleIndexCount = m_Indices.size();
 }
 
 void ShapeDrawer::DrawLine(glm::vec3 start, glm::vec3 end, Color color) {
