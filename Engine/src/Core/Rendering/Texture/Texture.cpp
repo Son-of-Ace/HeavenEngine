@@ -3,7 +3,6 @@
 #include <stb_image.h>
 
 #include <stdexcept>
-#include <print>
 
 namespace HE {
 
@@ -11,8 +10,6 @@ Texture::Texture(const std::string& path) {
   if (path.empty()) {
     return;
   }
-
-  std::print("Loading texture from path: {}", path);
 
   stbi_set_flip_vertically_on_load(true);
 
@@ -33,11 +30,12 @@ Texture::Texture(const std::string& path) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
   stbi_image_free(data);
-  std::print("Texture loaded: ID={} W={} H={} CH={}\n", m_ID, m_Width, m_Height, channels);
 }
 
 Texture::~Texture() {
-  if (m_ID) glDeleteTextures(1, &m_ID);
+  if (m_ID) {
+    glDeleteTextures(1, &m_ID);
+  }
 }
 
 Texture::Texture(Texture&& other) noexcept {
@@ -46,6 +44,8 @@ Texture::Texture(Texture&& other) noexcept {
   m_Height = other.m_Height;
 
   other.m_ID = 0;
+  other.m_Width = 0;
+  other.m_Height = 0;
 }
 
 Texture& Texture::operator=(Texture&& other) noexcept {
@@ -59,6 +59,8 @@ Texture& Texture::operator=(Texture&& other) noexcept {
     m_Height = other.m_Height;
 
     other.m_ID = 0;
+    other.m_Width = 0;
+    other.m_Height = 0;
   }
 
   return *this;

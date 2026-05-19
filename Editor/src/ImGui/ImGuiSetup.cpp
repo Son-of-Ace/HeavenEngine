@@ -1,5 +1,6 @@
 #include <imgui.h>
 #include <ImGuiConversions.hpp>
+#include <imgui_internal.h>
 
 #include "ImGuiSetup.hpp"
 
@@ -64,10 +65,35 @@ void ImGuiSetup::BeginFrame() {
   ImGui::Begin("DockSpaceWindow", nullptr, hostWindowFlags);
 }
 
+void ImGuiSetup::InitLayout() {
+  ImGui::DockBuilderRemoveNode(m_DockspaceID);
+  ImGui::DockBuilderAddNode(m_DockspaceID, ImGuiDockNodeFlags_DockSpace);
+  ImGui::DockBuilderSetNodeSize(m_DockspaceID, ImGui::GetMainViewport()->Size);
+
+  ImGuiID left, right, bottom, center;
+  ImGui::DockBuilderSplitNode(m_DockspaceID, ImGuiDir_Left, 0.2f, &left, &center);
+  ImGui::DockBuilderSplitNode(center, ImGuiDir_Right, 0.25f, &right, &center);
+  ImGui::DockBuilderSplitNode(center, ImGuiDir_Down, 0.3f, &bottom, &center);
+
+  ImGui::DockBuilderDockWindow("Scene Hierarchy", left);
+  ImGui::DockBuilderDockWindow("Viewport", center);
+  ImGui::DockBuilderDockWindow("Inspector", right);
+  ImGui::DockBuilderDockWindow("Console", bottom);
+  ImGui::DockBuilderDockWindow("Project", bottom);
+
+  ImGui::DockBuilderFinish(m_DockspaceID);
+}
+
 void ImGuiSetup::BeginDockspace() {
   ImGui::SetCursorPosY(ImGui::GetCursorPosY() - ImGui::GetStyle().ItemSpacing.y);
-  ImGuiID dockspaceID = ImGui::GetID("MainDockSpace");
-  ImGui::DockSpace(dockspaceID, ImVec2(0, 0));
+  m_DockspaceID = ImGui::GetID("MainDockSpace");
+
+  if (!m_LayoutInitialized) {
+    m_LayoutInitialized = true;
+    InitLayout();
+  }
+
+  ImGui::DockSpace(m_DockspaceID, ImVec2(0, 0));
 }
 
 void ImGuiSetup::EndFrame() {

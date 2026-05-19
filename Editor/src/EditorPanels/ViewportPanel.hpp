@@ -17,7 +17,7 @@ class ViewportPanel : public EditorPanel {
   void Init() override {
     Color vpColor = ColorFromRGB(50, 50, 50);
     glClearColor(vpColor.r, vpColor.g, vpColor.b, vpColor.a);
-    m_FrameBuffer.Create(1, 1);
+    m_FrameBuffer = FrameBuffer(1, 1);
   }
 
   void PreRender(Camera& camera) {
@@ -26,12 +26,27 @@ class ViewportPanel : public EditorPanel {
     viewportSize.x = std::max(viewportSize.x, 1.0f);
     viewportSize.y = std::max(viewportSize.y, 1.0f);
 
+    bool hovered = ImGui::IsWindowHovered();
+
+    bool dragging = ImGui::IsMouseDragging(ImGuiMouseButton_Middle);
+    float panSpeed = camera.GetPanSpeed();
+    ImVec2 mouseDelta = ImGui::GetIO().MouseDelta;
+
+    if (hovered) {
+      float scrollDelta = ImGui::GetIO().MouseWheel;
+      camera.Zoom(scrollDelta);
+    }
+
+    if (hovered && dragging) {
+      camera.Move(-mouseDelta.x * panSpeed, mouseDelta.y * panSpeed);
+    }
+
     if (viewportSize.x != m_ViewportSize.x || viewportSize.y != m_ViewportSize.y) {
       m_ViewportSize = viewportSize;
       m_FrameBuffer.Resize(viewportSize.x, viewportSize.y);
-
       glViewport(0, 0, viewportSize.x, viewportSize.y);
-      camera.Resize(viewportSize.x, viewportSize.y);
+
+      camera.Resize(viewportSize.x, viewportSize.y, camera.GetSize());
     }
 
     m_FrameBuffer.Bind();
@@ -41,7 +56,7 @@ class ViewportPanel : public EditorPanel {
   void PostRender() {
     m_FrameBuffer.Unbind();
 
-    ImTextureID texID = (ImTextureID)(intptr_t)m_FrameBuffer.GetColorAttatchment();
+    ImTextureID texID = (ImTextureID)(intptr_t)m_FrameBuffer.GetTexture();
     ImGui::Image(texID, m_ViewportSize, {0, 1}, {1, 0});
     ImGui::End();
   }

@@ -10,14 +10,20 @@ class ElementBuffer {
   ElementBuffer(std::size_t size, GLenum usage);
   ~ElementBuffer();
 
+  ElementBuffer(const ElementBuffer&) = delete;
+  ElementBuffer& operator=(const ElementBuffer&) = delete;
+
+  ElementBuffer(ElementBuffer&& other) noexcept;
+  ElementBuffer& operator=(ElementBuffer&& other) noexcept;
+
   void SetData(size_t size, const GLvoid* data);
   void Bind();
   void Unbind();
 
  private:
-  GLuint m_id;
-  size_t m_size;
-  GLenum m_usage;
+  GLuint m_ID;
+  size_t m_Size;
+  GLenum m_Usage;
 };
 
 }  // namespace HE

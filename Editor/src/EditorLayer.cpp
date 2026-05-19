@@ -6,25 +6,31 @@
 
 namespace HE::Editor {
 
-Transform quadTrans;
-Transform quadTrans2;
-Transform quadTrans3;
+Transform dirtTrans;
+Transform grassTrans;
 
-Material quadMat;
+Material dirtMat;
+Material grassMat;
 
-void DrawGrid(Renderer& renderer, const float aspect, const float size) {
+void DrawGrid(Renderer& renderer, const float halfWidth, const float halfHeight, const glm::vec2& camPos) {
   Color gridColor = ColorFromRGB(80, 80, 80, 0.7f);
 
-  float xExtent = aspect * size;
-  float yExtent = size;
   float step = 1.0f;
 
-  for (float x = -xExtent; x <= xExtent; x += step) {
-    renderer.DrawLine({x, -yExtent, 0}, {x, yExtent, 0}, gridColor);
+  float left = camPos.x - halfWidth;
+  float right = camPos.x + halfWidth;
+  float bottom = camPos.y - halfHeight;
+  float top = camPos.y + halfHeight;
+
+  float startX = floor(left / step) * step;
+  float startY = floor(bottom / step) * step;
+
+  for (float x = startX; x <= right; x += step) {
+    renderer.DrawLine({x, bottom, 0}, {x, top, 0}, gridColor);
   }
 
-  for (float y = -yExtent; y <= yExtent; y += step) {
-    renderer.DrawLine({-xExtent, y, 0}, {xExtent, y, 0}, gridColor);
+  for (float y = startY; y <= top; y += step) {
+    renderer.DrawLine({left, y, 0}, {right, y, 0}, gridColor);
   }
 }
 
@@ -38,16 +44,14 @@ AppConfig EditorLayer::GetAppConfig() {
 void EditorLayer::OnStart(GLFWwindow* window) {
   m_EditorUI.Init(window);
 
-  quadTrans.position = {0.0f, -4.5f, 0.0f};
-  quadTrans.scale = {1.0f, 1.0f, 0.0f};
+  dirtTrans.position = {0.0f, -4.5f, 0.0f};
+  dirtTrans.scale = {30.0f, 1.0f, 0.0f};
 
-  quadTrans2.position = {1.0f, -4.5f, 0.0f};
-  quadTrans2.scale = {1.0f, 1.0f, 0.0f};
+  grassTrans.position = {0.0f, -3.5f, 0.0f};
+  grassTrans.scale = {30.0f, 1.0f, 0.0f};
 
-  quadTrans3.position = {2.0f, -4.5f, 0.0f};
-  quadTrans3.scale = {1.0f, 1.0f, 0.0f};
-
-  quadMat.color = ColorFromRGB(80, 40, 0);
+  dirtMat.color = ColorFromRGB(80, 40, 0);
+  grassMat.color = ColorFromRGB(31, 229, 20);
 }
 
 void EditorLayer::OnUpdate(float dt) {
@@ -55,15 +59,13 @@ void EditorLayer::OnUpdate(float dt) {
 
 void EditorLayer::OnRender(Renderer& renderer) {
   m_EditorUI.BeginFrame();
-
   m_EditorUI.RenderPanels();
   m_EditorUI.PreRenderViewport(m_EditorCamera);
 
   renderer.BeginFrame(m_EditorCamera.GetViewProjection());
-  renderer.DrawQuad(quadTrans, quadMat);
-  renderer.DrawQuad(quadTrans2, quadMat);
-  renderer.DrawQuad(quadTrans3, quadMat);
-  DrawGrid(renderer, m_EditorCamera.GetAspect(), m_EditorCamera.GetSize());
+  renderer.DrawQuad(dirtTrans, dirtMat);
+  renderer.DrawQuad(grassTrans, grassMat);
+  DrawGrid(renderer, m_EditorCamera.GetHalfWidth(), m_EditorCamera.GetHalfHeight(), m_EditorCamera.GetPosition());
   renderer.EndFrame();
 
   m_EditorUI.PostRenderViewport();
